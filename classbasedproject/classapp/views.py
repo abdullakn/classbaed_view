@@ -1,9 +1,11 @@
+from django.db.models.base import Model
 from django.shortcuts import render
 
 from django.views.generic.base import TemplateView,RedirectView
 from . models import *
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 from django.utils import timezone
 
 
@@ -63,4 +65,14 @@ class BookDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['time'] = timezone.now()
         return context   
+
+
+class ListViewSample(ListView):
+    print("listviewjjjjjjjjjjjjjjjjjj")
+    Model=Post
+    print(Model,"sssdddddddddddd")
+    queryset=Post.objects.all()
+    template_name="listview.html"   
+    context_object_name='books'   
+    paginate_by=1 
         
