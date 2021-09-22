@@ -1,12 +1,16 @@
+from django import forms
 from django.db.models.base import Model
 from django.shortcuts import render
+from django.urls.conf import path
 
 from django.views.generic.base import TemplateView,RedirectView
 from . models import *
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.views.generic.edit import FormView
 from django.utils import timezone
+from . forms import AddForm
 
 
 
@@ -75,4 +79,17 @@ class ListViewSample(ListView):
     template_name="listview.html"   
     context_object_name='books'   
     paginate_by=1 
+
+
+class AddBook(FormView):
+    template_name='add_book.html'
+    form_class=AddForm
+    success_url='/sample1/'
+    print(form_class)
+    
+    def form_valid(self, form):
+        print(form,"after enter....................................")
+        
+        form.save()
+        return super().form_valid(form)
         

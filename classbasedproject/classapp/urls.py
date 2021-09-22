@@ -2,7 +2,7 @@
 from django.conf.urls import url
 from django.urls import path
 from django.views.generic import TemplateView
-from . views import ListViewSample, Sample1,Sample2,Sample3,BookList,BookDetailView
+from . views import AddBook, ListViewSample, Sample1,Sample2,Sample3,BookList,BookDetailView
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
@@ -23,6 +23,10 @@ urlpatterns = [
 
 
     #list view
-    path('listview/',ListViewSample.as_view(),name='listview')
+    path('listview/',ListViewSample.as_view(),name='listview'),
+
+
+    #form view
+    path('add_book/',AddBook.as_view(),name='add_book')
 
 ]
