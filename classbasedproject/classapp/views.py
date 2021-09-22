@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.views.generic.base import TemplateView,RedirectView
 from . models import *
 from django.shortcuts import get_object_or_404
+from django.views.generic.detail import DetailView
+from django.utils import timezone
 
 
 
@@ -43,4 +45,22 @@ class Sample3(TemplateView):
         context['posts']=get_object_or_404(Post,pk=self.kwargs.get('pk'))
         return context        
 
+
+class BookList(TemplateView):
+    template_name='booklist.html'
+    
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context['books']=Book.objects.all()
+        return context    
+
+
+class BookDetailView(DetailView):
+    model=Book  
+    template_name='book_detail.html'   
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['time'] = timezone.now()
+        return context   
         

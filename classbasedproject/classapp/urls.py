@@ -2,7 +2,7 @@
 from django.conf.urls import url
 from django.urls import path
 from django.views.generic import TemplateView
-from . views import Sample1,Sample2,Sample3
+from . views import Sample1,Sample2,Sample3,BookList,BookDetailView
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
@@ -14,5 +14,10 @@ urlpatterns = [
     #redirect view
     path('abdullakn.online',RedirectView.as_view(url='https://abdullakn.online')),
     path('sample2/<int:pk>/',Sample2.as_view(),name='sample2'),
-    path('sample3/<int:pk>/',Sample3.as_view(),name='sample3')
+    path('sample3/<int:pk>/',Sample3.as_view(),name='sample3'),
+
+
+    #detail view
+    path('book/',BookList.as_view(),name='booklist'),
+    path('book/<slug:slug>/',BookDetailView.as_view(),name='bookdetail'),
 ]
